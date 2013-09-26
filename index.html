@@ -22,8 +22,12 @@
 
         <!-- Add your site or application content here -->
         <p>Hello world! This is HTML5 Boilerplate.</p>
+        <form id="addTask">
+            <input type="text" name="" value="" placeholder="">
+            <input type="submit" name="submit" value="submit" placeholder="">
+        </form>
         <script id="taskTemplate" type="template">
-            <span><%= title %></span> <button class="edit">edit</buton> <button type="button">delete</button>
+            <span><%= title %></span> <button class="edit">edit</buton> <button type="button" class="delete">delete</button>
         </script>
         <script src="js/main.js" type="text/javascript" charset="utf-8" async defer></script>
     </body>
