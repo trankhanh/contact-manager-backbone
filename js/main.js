@@ -4,12 +4,12 @@ var App = {
 	View: {}
 };
 
+var vent = _.extend({}, Backbone.Events);
+
 App.Model.Task = Backbone.Model.extend({
 	initialize: function() {
 
 	},
-
-
 
 	validate: function(attrs) {
 		if(!trim(attrs.title)) {
@@ -111,6 +111,43 @@ App.View.Tasks = Backbone.View.extend({
 	}
 })
 
+App.Router = Backbone.Router.extend({
+	routes: {
+		'': 'index',
+		'show': 'show',
+		'appointment/:id': 'appointment'
+	},
+
+	index: function() {
+		console.log("index page");
+	},
+
+	show: function() {
+		console.log("show page");
+	},
+
+	appointment: function(id) {
+		console.log("Go in!");
+		vent.trigger('appointment:show', id);
+	}
+})
+
+App.View.Appointment = Backbone.View.extend({
+	initialize: function() {
+		vent.on("appointment:show", this.show, this);
+	},
+
+	show: function() {
+		alert("");
+	}
+});
+
+appointment = new App.View.Appointment;
+
+
+
+// appointment = new App.View.Appointment;
+
 var tasks = new App.Collection.Tasks([
 	{
 		title: "Go to store"
@@ -130,3 +167,6 @@ tasksView.render();
 
 $('body').append(tasksView.$el);
 
+new App.Router;
+
+Backbone.history.start();
